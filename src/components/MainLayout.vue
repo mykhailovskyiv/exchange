@@ -26,7 +26,9 @@ export default {
 
 <style lang="scss">
   .container {
+    margin: 0 auto;
     margin-top: 20px;
+    width: 90%;
     .title {
       color: white;
     }

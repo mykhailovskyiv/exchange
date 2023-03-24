@@ -63,7 +63,6 @@ export default {
 .exchange {
   margin: 0 auto;
   margin-top: 20px;
-  width: 90%;
   &__container {
     margin-top: 10px;
     border: 1px solid;

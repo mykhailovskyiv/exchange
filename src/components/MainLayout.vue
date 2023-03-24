@@ -1,58 +1,35 @@
 <template>
  <div class="container">
-   <h2>Currency Exchange</h2>
-   <div class="currency">
-     <div class="currency__container">
-       <input
-         v-model="currencyValue"
-         type="number"
-         class="currency__input"
-       >
-       <select>
-         <option
-           v-for="item in currency"
-           :key="item.index"
-           :value="item.name"
-           class="currency__select"
-         >
-           {{ item.code }}
-         </option>
-       </select>
-     </div>
-     <div class="currency__container">
-       <input
-         v-model="currencyValue"
-         type="number"
-         class="currency__input"
-       >
-       <select>
-         <option
-           v-for="item in currency"
-           :key="item.index"
-           :value="item.name"
-           class="currency__select"
-         >
-           {{ item.code }}
-         </option>
-       </select>
-     </div>
-   </div>
+   <h2 class="title">Currency Exchange</h2>
+   <exchange-select :currency="currency"></exchange-select>
+   <exchange-currency :currency="currency"></exchange-currency>
  </div>
 </template>
 
 <script>
-import currency from '../assets/currency.json'
+import currency from '../assets/currency_codes.json'
+import ExchangeSelect from "./ExchangeSelect";
+import ExchangeCurrency from "./ExchangeCurrency";
 export default {
   name: "MainLayout",
+  components: {ExchangeCurrency, ExchangeSelect},
   data() {
     return {
       currency: currency,
-      currencyValue: 100
     }
+  },
+  comments: {
+    ExchangeSelect
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+  .container {
+    margin-top: 20px;
+    .title {
+      color: white;
+    }
+  }
 
 </style>

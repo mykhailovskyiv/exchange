@@ -39,6 +39,7 @@ h1,h2,h3,h4,h5,p,span {
 }
 body {
   margin: 0;
+  background-color: #1e0156;
 }
 
 </style>

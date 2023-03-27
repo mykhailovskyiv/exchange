@@ -30,7 +30,7 @@ export default {
     margin-top: 20px;
     width: 90%;
     .title {
-      color: white;
+      color: #ffffff;
     }
   }
 

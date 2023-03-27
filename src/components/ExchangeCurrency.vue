@@ -56,8 +56,7 @@ export default {
     }
   },
   mounted() {
-    this.changeCurrency()
-
+    // this.changeCurrency()
   }
 }
 </script>
@@ -75,8 +74,8 @@ export default {
      padding: 5px 10px;
      border: none;
      border-radius: 10px;
-     background-color: #1e0156;
-     color: white;
+     background-color: #000000;
+     color: greenyellow;
    }
    &-exchange {
      display: flex;
@@ -86,9 +85,9 @@ export default {
        display: flex;
        justify-content: space-between;
        border-radius: 10px;
-       background-color: #1e0156;
+       background-color: #000000;
        margin-top: 10px;
-       color: white;
+       color: greenyellow;
        padding: 10px;
      }
    }

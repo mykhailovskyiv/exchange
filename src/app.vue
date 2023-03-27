@@ -34,12 +34,12 @@ export default {
 }
 h1,h2,h3,h4,h5,p,span {
   margin: 0;
-  color: black;
+  color: #ffffff;
   box-sizing: border-box;
 }
 body {
   margin: 0;
-  background-color: #1e0156;
+  background-color: #1f1f1f;;
 }
 
 </style>

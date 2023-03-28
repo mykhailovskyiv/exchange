@@ -1,14 +1,20 @@
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/main.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    path: __dirname + '/dist',
+    filename: 'index_bundle.js'
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      favicon: './dollar.svg'
+    })
+  ],
   module: {
     rules: [
       {

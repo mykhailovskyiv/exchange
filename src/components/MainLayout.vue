@@ -1,5 +1,6 @@
 <template>
  <div class="container">
+   <img src="dollar.svg" alt="icon" width="35px">
    <h2 class="title">Currency Exchange</h2>
    <exchange-select :currency="currency"></exchange-select>
    <exchange-currency :currency="currency"></exchange-currency>

@@ -33,5 +33,10 @@ export default {
       color: #ffffff;
     }
   }
+  @media(min-width: 1100px) {
+    .container {
+      width: 1000px;
+    }
+  }
 
 </style>

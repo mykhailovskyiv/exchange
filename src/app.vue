@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <main-layout></main-layout>
+    <footer class="footer">
+      <span>© {{ this.year }} Valerii Mykhailovskyi | All rights reserved</span>
+    </footer>
   </div>
 </template>
 
@@ -12,7 +15,7 @@ export default {
   components: {MainLayout},
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      year: new Date().getFullYear()
     }
   },
   comments: {
@@ -40,6 +43,17 @@ h1,h2,h3,h4,h5,p,span {
 body {
   margin: 0;
   background-color: #1f1f1f;;
+}
+.footer {
+  margin: 20px 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  span {
+    font-size: 13px;
+    color: #ffffff;
+  }
 }
 
 </style>

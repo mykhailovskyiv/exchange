@@ -59,37 +59,39 @@ export default {
     }
   },
   mounted() {
-    // fetch(`https://exchange-rates.abstractapi.com/v1/convert?api_key=a2528bb76fdf4236853bf722774e052c&base=${this.currentOne}&target=${this.currentTwo}&&base_amount=${this.inputOne}`)
-    //   .then(resp => resp.json())
-    //   .then((resp) => {
-    //     this.inputTwo = resp.converted_amount
-    //   })
+    fetch(`https://exchange-rates.abstractapi.com/v1/convert?api_key=a2528bb76fdf4236853bf722774e052c&base=${this.currentOne}&target=${this.currentTwo}&&base_amount=${this.inputOne}`)
+      .then(resp => resp.json())
+      .then((resp) => {
+        this.inputTwo = resp.converted_amount
+      })
   },
   methods: {
-    handleSelectChange() {
+    handleSelectChange: function () {
       if (this.currentOne === this.currentTwo) {
         this.currentTwo = this.prevOne;
         this.currentOne = this.prevTwo;
-      } else if (this.currentOne === this.prevTwo && this.currentTwo=== this.prevOne) {
+      } else if (this.currentOne === this.prevTwo && this.currentTwo === this.prevOne) {
         this.currentOne = this.prevTwo;
         this.currentTwo = this.prevOne;
       }
       this.prevOne = this.currentOne;
       this.prevTwo = this.currentTwo;
+      this.inputOne = 1
+      this.getFirstCurrency()
     },
-    // getFirstCurrency: debounce(function () {
-    //     fetch(`https://exchange-rates.abstractapi.com/v1/convert?api_key=a2528bb76fdf4236853bf722774e052c&base=${this.currentOne}&target=${this.currentTwo}&&base_amount=${this.inputOne}`)
-    //     .then(resp => resp.json())
-    //     .then((resp) => {
-    //       this.inputTwo = resp.converted_amount
-    //     })}, 1000),
-    //
-    // getSecondCurrency: debounce(function () {
-    //     fetch(`https://exchange-rates.abstractapi.com/v1/convert?api_key=a2528bb76fdf4236853bf722774e052c&base=${this.currentTwo}&target=${this.currentOne}&&base_amount=${this.inputTwo}`)
-    //     .then(resp => resp.json())
-    //     .then((resp) => {
-    //       this.inputOne = resp.converted_amount
-    //     })}, 1000)
+    getFirstCurrency: debounce(function () {
+        fetch(`https://exchange-rates.abstractapi.com/v1/convert?api_key=a2528bb76fdf4236853bf722774e052c&base=${this.currentOne}&target=${this.currentTwo}&&base_amount=${this.inputOne}`)
+        .then(resp => resp.json())
+        .then((resp) => {
+          this.inputTwo = resp.converted_amount
+        })}, 1000),
+
+    getSecondCurrency: debounce(function () {
+        fetch(`https://exchange-rates.abstractapi.com/v1/convert?api_key=a2528bb76fdf4236853bf722774e052c&base=${this.currentTwo}&target=${this.currentOne}&&base_amount=${this.inputTwo}`)
+        .then(resp => resp.json())
+        .then((resp) => {
+          this.inputOne = resp.converted_amount
+        })}, 1000)
   },
   watch: {
     inputOne(val) {
@@ -126,6 +128,7 @@ export default {
     padding-left: 10px;
     background: black;
     color: greenyellow;
+    outline: none;
 
   }
   &__select {
@@ -136,6 +139,15 @@ export default {
     color: greenyellow;
   }
 
+}
+@media(min-width: 426px) {
+  .exchange {
+    display: flex;
+    justify-content: space-between;
+    &__container {
+      width: 47%;
+    }
+  }
 }
 
 </style>

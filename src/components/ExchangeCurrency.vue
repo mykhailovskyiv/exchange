@@ -17,18 +17,46 @@
          <div>{{value}}</div>
        </div>
      </div>
+     <button @click="showModal = !showModal" class="currency__button">Add new currency</button>
    </div>
+   <Modal
+     v-if="showModal"
+     :filteredCurrency="filteredCurrency"
+     @addNewCurrency="addNewCurrency"
+     @closeModal="closeModal"
+   >
+   </Modal>
  </div>
 </template>
 
 <script>
+import Modal from "./Modal";
 export default {
   name: "ExchangeCurrency",
   data() {
     return {
       currencyValue: "USD",
+      defaultCurrency: [
+        {
+          code: "USD",
+          name: "American Dollar",
+        },
+        {
+          code: "EUR",
+          name: "Euro",
+        },
+        {
+          code: "ETH",
+          name: "Ethereum",
+        },
+        {
+          code: "BCH",
+          name: "Bitcoin Cash",
+        },
+      ],
       currencyGet: [],
       currentRate: null,
+      showModal: false
     }
   },
   props: {
@@ -37,10 +65,20 @@ export default {
       required: true
     }
   },
+  components: {
+    Modal
+  },
+  created() {
+    const itemsInLocalStorage = localStorage.getItem("items");
+    if (itemsInLocalStorage) {
+      this.defaultCurrency = JSON.parse(itemsInLocalStorage);
+    }
+    this.changeCurrency()
+  },
   methods: {
     changeCurrency() {
       this.currencyGet = []
-      this.currency.forEach((item) => {
+      this.defaultCurrency.forEach((item) => {
         this.currencyValue !== item.code ? this.currencyGet.push(item.code) : false
       })
       this.getCurrency()
@@ -53,11 +91,24 @@ export default {
           this.currentRate = resp.exchange_rates
         })
 
+    },
+    addNewCurrency(item) {
+      this.defaultCurrency.push(item)
+      this.showModal = false
+      localStorage.setItem("items", JSON.stringify(this.defaultCurrency));
+      this.changeCurrency()
+    },
+    closeModal(close) {
+      this.showModal = close
     }
   },
-  mounted() {
-    // this.changeCurrency()
-  }
+  computed: {
+    filteredCurrency() {
+      return this.currency.filter((item) => {
+        return !this.defaultCurrency.find((i) => i.code === item.code);
+      });
+    },
+  },
 }
 </script>
 
@@ -77,6 +128,14 @@ export default {
      background-color: #000000;
      color: greenyellow;
    }
+   &__button {
+     padding: 5px 10px;
+     border: none;
+     border-radius: 10px;
+     background-color: #000000;
+     color: greenyellow;
+     margin-top: 10px;
+   }
    &-exchange {
      display: flex;
      flex-direction: column;
@@ -90,6 +149,15 @@ export default {
        color: greenyellow;
        padding: 10px;
      }
+   }
+ }
+ @media(min-width: 1100px) {
+   .currency {
+     &__select, &__button {
+       padding: 7px 15px;
+       font-size: 15px;
+     }
+
    }
  }
 
